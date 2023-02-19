@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  news_feed_service:
+    image: jovisai/rss_feed_service:latest
+    restart: always
+    networks:
+      - default
+    build: ./
+    volumes:
+      - ./:/usr/src/app/
+    ports:
+      - '8011:8011'
