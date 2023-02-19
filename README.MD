@@ -1,4 +1,4 @@
-## Generate RSS feed for any website based on the given CSS selectors
+## WIP: Generate RSS feed for any website based on the given CSS selectors
 
 Example:
 ```commandline
