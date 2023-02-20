@@ -1,8 +1,24 @@
 ## WIP: Generate RSS feed for any website based on the given CSS selectors
 
-Example:
+## How to run
+1. Pull the code from git
 ```commandline
-curl --location 'http://192.168.1.36:8011/feed/rss_xml' \
+git clone https://github.com/jovisai/rss-feed-generator.git
+```
+
+2. Build the docker container
+```commandline
+docker compose build
+```
+3. Run the container
+```commandline
+docker compose up
+```
+4. Test the rss feed generator
+
+The below curl command generates rss feed for equitymaster.com
+```commandline
+curl --location 'http://<DOCKER_IP>:8011/feed/rss_xml' \
 --header 'Content-Type: application/json' \
 --data '{
     "website_title":"Equity Master",
@@ -18,4 +34,5 @@ curl --location 'http://192.168.1.36:8011/feed/rss_xml' \
 }'
 ```
 
-Will generate an XML output for website https://www.equitymaster.com
+5. Access the xml file directly after generating \
+http://<DOCKER_IP>:8011/www.equitymaster.com.xml
