@@ -20,9 +20,13 @@ rss_feed_descriptor_schema = {
         "description_css": {"type": "string"},
         "author_css": {"type": "string"},
         "image_css": {"type": "string"},
-        "date_css": {"type": "string"}
+        "date_css": {"type": "string"},
+        "website_link": {"type": "string"},
+        "website_title": {"type": "string"},
+        "website_description": {"type": "string"}
     },
-    "required": ["url", "title_css", "link_css", "description_css", "date_css"]
+    "required": ["url", "title_css", "link_css", "description_css", "date_css", "website_link", "website_title",
+                 "website_description"]
 }
 
 
@@ -35,6 +39,9 @@ def refresh_feeds():
     description_css = request.get_json()["description_css"]
     author_css = request.get_json()["author_css"]
     image_css = request.get_json()["image_css"]
+    website_title = request.get_json()["website_title"]
+    website_link = request.get_json()["website_link"]
+    website_description = request.get_json()["website_description"]
     date_css = request.get_json()["date_css"]
 
     r = requests.get(url)
@@ -47,10 +54,9 @@ def refresh_feeds():
     date_elements = soup.select(date_css)
 
     fg = FeedGenerator()
-    fg.title('Some Testfeed')
-    fg.link(href='http://example.com', rel='alternate')
-    fg.link(href='http://muthu.co/test.atom', rel='self')
-    fg.description("sss")
+    fg.title(website_title)
+    fg.link(href=website_link, rel='self')
+    fg.description(website_description)
     for index, title_element in enumerate(title_elements):
         fe = fg.add_entry()
         fe.id(link_elements[index].get('href'))
@@ -64,6 +70,6 @@ def refresh_feeds():
         dt = dateutil.parser.parse(date_elements[index].get_text())
         dt = dt.replace(tzinfo=timezone.utc)
 
-        fe.pubDate(dt.isoformat())
+        fe.published(dt.isoformat())
 
     return Response(fg.rss_str(), mimetype='text/xml')
