@@ -2,9 +2,12 @@
 
 Example:
 ```commandline
-curl --location 'http://192.168.1.24:8011/feed/rss_xml' \
+curl --location 'http://192.168.1.36:8011/feed/rss_xml' \
 --header 'Content-Type: application/json' \
 --data '{
+    "website_title":"Equity Master",
+    "website_link":"https://www.equitymaster.com/rss",
+    "website_description":"Helping You Build Wealth With Honest Research. Since 1996",
     "url" : "https://www.equitymaster.com/archives.asp?von=1&ov=1&tm=1&cotd=1&5min=1&mnuserh=N",
     "title_css" : "#tdArticles .nns h3 > a:nth-child(2)",                           
     "link_css" : "#tdArticles .nns h3 > a:nth-child(2)",
