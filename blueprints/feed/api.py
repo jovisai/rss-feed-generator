@@ -1,5 +1,6 @@
-from datetime import datetime, timezone
-from http import HTTPStatus
+import os
+from datetime import timezone
+from urllib.parse import urlparse
 
 import dateutil
 import requests
@@ -71,5 +72,7 @@ def refresh_feeds():
         dt = dt.replace(tzinfo=timezone.utc)
 
         fe.published(dt.isoformat())
-
+        domain = urlparse(website_link).netloc
+        filename = os.path.join(os.environ.get('STATIC_FILES_ROOT'), "{0}.xml".format(domain))
+        fg.rss_file(filename)
     return Response(fg.rss_str(), mimetype='text/xml')
