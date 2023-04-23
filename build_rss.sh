@@ -1,3 +1,4 @@
+#!/bin/bash
 # for equity master
 curl --location 'http://127.0.0.1:8011/feed/rss_xml' \
 --header 'Content-Type: application/json' \
